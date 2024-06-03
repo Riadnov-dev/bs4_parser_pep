@@ -1,11 +1,10 @@
-import csv
 import logging
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 from requests import RequestException
 
-from constants import BASE_DIR, PEP_URL
+from constants import PEP_URL
 from exceptions import ParserFindTagException
 
 
@@ -30,6 +29,13 @@ def find_tag(soup, tag, attrs=None):
     return searched_tag
 
 
+def fetch_and_parse(session, url):
+    response = get_response(session, url)
+    if response is None:
+        raise ValueError(f"Не удалось получить данные по адресу: {url}")
+    return BeautifulSoup(response.text, features="lxml")
+
+
 def parse_pep_list(session):
     response = get_response(session, PEP_URL)
     if response is None:
@@ -38,10 +44,10 @@ def parse_pep_list(session):
     soup = BeautifulSoup(response.text, "html.parser")
     tables = soup.find_all("table", class_="pep-zero-table")
 
-    pep_data = []
+    pep_data = set()
     for table in tables:
         rows = table.find_all("tr")
-        for row in rows[1:]:  # Пропускаем заголовок таблицы
+        for row in rows[1:]:
             columns = row.find_all("td")
             if len(columns) < 2:
                 continue
@@ -49,9 +55,9 @@ def parse_pep_list(session):
             title = columns[2].text.strip()
             status = columns[0].text.strip() if len(columns) > 2 else "Unknown"
             link = columns[1].find("a")["href"]
-            pep_data.append((number, title, status, link))
+            pep_data.add((number, title, status, link))
 
-    return pep_data
+    return list(pep_data)
 
 
 def parse_pep_details(session, pep_data):
@@ -87,16 +93,3 @@ def parse_pep_details(session, pep_data):
                 (pep_page_url, page_status, table_status))
 
     return status_counts, mismatched_statuses
-
-
-def save_pep_results(status_counts):
-    file_path = BASE_DIR / "results" / "pep_statuses.csv"
-    with open(file_path, "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["Статус", "Количество"])
-        total_count = 0
-        for status, count in status_counts.items():
-            writer.writerow([status, count])
-            total_count += count
-        writer.writerow(["Total", total_count])
-    logging.info(f"Результаты сохранены в файл: {file_path}")
