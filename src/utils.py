@@ -32,7 +32,7 @@ def find_tag(soup, tag, attrs=None):
 def fetch_and_parse(session, url):
     response = get_response(session, url)
     if response is None:
-        raise ValueError(f"Не удалось получить данные по адресу: {url}")
+        raise RuntimeError(f"Не удалось получить данные по адресу: {url}")
     return BeautifulSoup(response.text, features="lxml")
 
 

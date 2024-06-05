@@ -1,11 +1,15 @@
 import logging
-import re
 from urllib.parse import urljoin
 
 import requests_cache
 from tqdm import tqdm
 
-from constants import BASE_DIR, MAIN_DOC_URL
+from constants import (
+    BASE_DIR,
+    MAIN_DOC_URL,
+    PYTHON_VERSION_PATTERN,
+    PDF_A4_ZIP_PATTERN
+)
 from configs import configure_argument_parser, configure_logging
 from outputs import control_output
 from utils import (
@@ -53,12 +57,9 @@ def latest_versions(session):
 
     results = [("Ссылка на документацию", "Версия", "Статус")]
 
-    # Регулярное выражение для извлечения версии и статуса Python
-    pattern = r"Python (?P<version>\d\.\d+) \((?P<status>.*)\)"
-
     for a_tag in a_tags:
         link = a_tag["href"]
-        text_match = re.search(pattern, a_tag.text)
+        text_match = PYTHON_VERSION_PATTERN.search(a_tag.text)
         if text_match:
             version, status = text_match.groups()
         else:
@@ -74,7 +75,7 @@ def download(session):
     main_tag = find_tag(soup, "div", {"role": "main"})
     table_tag = find_tag(main_tag, "table", {"class": "docutils"})
     pdf_a4_tag = find_tag(
-        table_tag, "a", {"href": re.compile(r".+pdf-a4\.zip$")})
+        table_tag, "a", {"href": PDF_A4_ZIP_PATTERN})
     archive_url = urljoin(downloads_url, pdf_a4_tag["href"])
     filename = archive_url.split("/")[-1]
 
