@@ -34,16 +34,21 @@ Key features:
 
 
 ### 🚀 Quick Start
+
+Clone the repository
 ```
-# Clone the repository
 git clone https://github.com/Riadnov-dev/bs4_parser_pep.git
 cd bs4_parser_pep/src
+```
 
-# Create & activate virtual environment
+Create & activate virtual environment
+```
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-# Install dependencies
+Install dependencies
+```
 pip install -r requirements.txt
 ```
 
@@ -66,17 +71,24 @@ whats-new — Parse "What's New" articles for Python releases
 download — Download selected Python documentation PDFs
 
 📂 Example Commands
+
+Parse all PEPs
 ```
-# Parse all PEPs
 python main.py pep
+```
 
-# Get latest versions
+Get latest versions
+```
 python main.py latest-versions
+```
 
-# What's New articles
+What's New articles
+```
 python main.py whats-new
+```
 
-# Download documentation PDF
+Download documentation PDF
+```
 python main.py download
 ```
 
