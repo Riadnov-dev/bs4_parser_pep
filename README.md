@@ -1,35 +1,42 @@
-# 🐍 bs4_parser_pep — Python Web Scraper for Python.org
-A command-line tool to scrape structured information from the official Python documentation website. Supports extracting PEP indexes, latest versions, "What's New" articles, and downloading documentation files. Built with BeautifulSoup for HTML parsing, requests-cache for HTTP caching, and robust logging for debugging.
+# 🐍 bs4_parser_pep — Python Web Scraper
 
-## 📌 Description
-bs4_parser_pep automates the retrieval of structured Python documentation data.
-The scraper is modular, easy to extend, and optimized with request caching to reduce load on the Python.org server.
-Outputs are stored as CSV files for further analysis.
+A **command-line tool** for scraping structured information from the official **Python.org documentation site**.  
+Built with **BeautifulSoup4**, **requests-cache**, and robust **logging** for debugging.
 
-Key features:
+---
 
-📜 PEP index parsing — fetch all Python Enhancement Proposals with status and metadata
+## 📌 About the Project
 
-🆕 Latest versions extraction — list all Python versions and links
+**bs4_parser_pep** automates retrieval of structured Python documentation data.  
+The scraper is modular, optimized with **HTTP request caching**, and stores results as **CSV files** for further analysis.  
 
-📖 "What's New" articles — parse release notes for each Python version
+Users can:  
+- Parse **PEP indexes** with statuses and metadata  
+- Extract the list of **latest Python versions**  
+- Collect **"What’s New"** articles for releases  
+- Download **documentation files** in PDF  
+- Save data in **CSV format**  
+- Benefit from detailed **logging** for debugging  
 
-📥 Documentation download — get selected PDF documentation files
+---
 
-🗂 CSV export — structured results for further processing
+## 🧰 Tech Stack
 
-💾 HTTP caching — speed up repeated runs
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/BeautifulSoup4-8A2BE2?style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/Requests-FF9800?style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/Requests--Cache-4CAF50?style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/Logging-696969?style=for-the-badge&logo=python&logoColor=white"/>
 
-🛠 Logging — detailed logs for debugging and tracking
+---
 
+## ✨ Features
 
-## 🛠 Tech Stack
+- 📜 **PEP index parsing** — fetch all Python Enhancement Proposals with status & metadata  
+- 🆕 **Latest versions extraction** — list Python versions and links  
+- 📖 **"What’s New" articles** — parse release notes per version  
+- 📥 **Documentation download** — grab PDF files from Python.org  
+- 🗂️ **CSV export** — structured results for analysis  
+- 💾 **HTTP caching** — faster repeated runs, less load on server  
+- 🛠️ **Logging** — detailed logs for tracking & debugging  
 
-[![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)](https://www.python.org/)
-[![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-HTML%20parser-8A2BE2?logo=python)](https://www.crummy.com/software/BeautifulSoup/)
-[![Requests](https://img.shields.io/badge/Requests-HTTP%20client-FF9800?logo=python)](https://requests.readthedocs.io/)
-[![Requests-Cache](https://img.shields.io/badge/Requests--Cache-HTTP%20caching-4CAF50?logo=python)](https://requests-cache.readthedocs.io/)
-[![Logging](https://img.shields.io/badge/Logging-built--in-lightgrey?logo=python)](https://docs.python.org/3/library/logging.html)
+---
 
 
 
